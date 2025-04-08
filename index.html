@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -84,10 +84,10 @@
 <body>
   <div id="tituloFijo">Sigue descubriendo Sant Jordi</div>
   <div id="intro">
-    <p><em>Aunque fuera a 10.000km</em> el año pasado descubriste lo que era <strong>Sant Jordi</strong>, lo que era <strong>Barcelona</strong> el <strong>23 de Abril</strong> y lo que significa para mí.<br><br>
-    Pero eso no es todo, ni mucho menos. Este año quiero acercarte un poco más algo que, sin planearlo en absoluto, <strong>nos une tanto en este día</strong>.<br><br>
-    <em>Descúbrelo.</em></p>
-  </div>
+  <p>Aunque fuera a 10.000km el año pasado descubriste lo que era Sant Jordi, lo que era Barcelona el 23 de Abril y lo que significa para mí.<br><br>
+  <strong>Este año quiero acercarte un poco más algo que, sin planearlo en absoluto, nos une tanto en este día.</strong><br><br>
+  <span style="font-size: 1.2em;">Descúbrelo.</span></p>
+</div>
   <img id="portada" src="https://media.discordapp.net/attachments/1354818156891476123/1359104185533992980/IMG_2286.png?ex=67f643e8&is=67f4f268&hm=8c4ac073ed67a0b20aad76b2776a913e514dbb73da52a29e74db64a9c54d6aed&" alt="portada de la ruleta" style="display: block;" />
   <img id="imagen" alt="libro" />
   <div>
@@ -96,8 +96,11 @@
   </div>
   <div id="mensaje"></div>
   <div id="descripcion"></div>
+<div>
+  <button id="botonLoQuiero" onclick="irAlDrive()" style="background-color: #d4b38c; color: #ffffff; font-weight: bold; display: none;">Lo quiero</button>
   <button id="botonRepetir" onclick="reiniciar()">Volver a girar</button>
-<button id="botonLoQuiero" onclick="irAlDrive()" style="background-color: #d4b38c; color: #ffffff; font-weight: bold; display: none;">Lo quiero</button>
+</div>
+  
   <script>
     const imagenElemento = document.getElementById('imagen');
     const portadaElemento = document.getElementById('portada');
@@ -106,6 +109,7 @@
     const botonRepetir = document.getElementById('botonRepetir');
     const botonIniciar = document.getElementById('botonIniciar');
     const botonDetener = document.getElementById('botonDetener');
+    const botonLoQuiero = document.getElementById('botonLoQuiero');
     const intro = document.getElementById('intro');
 
     const libros = [
@@ -182,7 +186,7 @@
     }
 
     function mostrarMensajeFinal() {
-      mensaje.textContent = `Tu libro es: ${libroFinal.nombre}`;
+      mensaje.innerHTML = `Tu libro es: <strong>${libroFinal.nombre}</strong>`;
       descripcion.textContent = libroFinal.descripcion;
       mensaje.style.display = 'block';
       setTimeout(() => mensaje.style.opacity = 1, 10);
@@ -199,16 +203,16 @@
       botonRepetir.style.display = 'none';
       iniciar();
     }
-  
-function irAlDrive() {
-  const enlacesDrive = {
-    'Pedro Páramo': 'https://drive.google.com/drive/folders/1Mv6Qf8OpCVhqXyMFzQUpszEPodYSiRVb?usp=drive_link',
-    'Cien Años de Soledad': 'https://drive.google.com/drive/folders/1SXffqKWDAq3PEQS8ulqWO0CIqBI5BnUe?usp=drive_link',
-    'La Casa de los Espíritus': 'https://drive.google.com/drive/folders/12J2wAIfTMIbug-1x3DVlOeIFQ8EdVCU9?usp=drive_link'
-  };
 
-  window.open(enlacesDrive[libroFinal.nombre], '_blank');
-}
-</script>
+    function irAlDrive() {
+      const enlacesDrive = {
+        'Pedro Páramo': 'https://drive.google.com/drive/folders/1Mv6Qf8OpCVhqXyMFzQUpszEPodYSiRVb?usp=drive_link',
+        'Cien Años de Soledad': 'https://drive.google.com/drive/folders/1SXffqKWDAq3PEQS8ulqWO0CIqBI5BnUe?usp=drive_link',
+        'La Casa de los Espíritus': 'https://drive.google.com/drive/folders/12J2wAIfTMIbug-1x3DVlOeIFQ8EdVCU9?usp=drive_link'
+      };
+
+      window.open(enlacesDrive[libroFinal.nombre], '_blank');
+    }
+  </script>
 </body>
 </html>
