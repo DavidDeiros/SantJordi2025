@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ruleta de Sant Jordi</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      padding: 40px;
+      background-color: #fdf6ec;
+      color: #3e2f1c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #imagen, #portada {
+      width: 300px;
+      height: 440px;
+      object-fit: cover;
+      margin: 10px auto 30px auto;
+      transition: transform 0.2s ease;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+      display: none;
+    }
+    .rebote {
+      animation: rebote 0.4s ease;
+    }
+    @keyframes rebote {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.2); }
+      60%  { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #e8d8c3;
+      border: none;
+      border-radius: 6px;
+    }
+    #mensaje, #descripcion {
+      margin-top: 20px;
+      font-size: 18px;
+      display: none;
+      max-width: 600px;
+      text-align: left;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    #botonRepetir, #botonDetener {
+      padding: 12px 25px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #e8d8c3;
+      border: none;
+      border-radius: 6px;
+      display: none;
+    }
+    #intro {
+      margin-top: -10px;
+      margin-bottom: 10px;
+      max-width: 600px;
+      text-align: left;
+    }
+    #tituloFijo {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #3e2f1c;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    button:hover {
+      background-color: #dbcab5;
+      transition: background-color 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="tituloFijo">Sigue descubriendo Sant Jordi</div>
+  <div id="intro">
+    <p><em>Aunque fuera a 10.000km</em> el año pasado descubriste lo que era <strong>Sant Jordi</strong>, lo que era <strong>Barcelona</strong> el <strong>23 de Abril</strong> y lo que significa para mí.<br><br>
+    Pero eso no es todo, ni mucho menos. Este año quiero acercarte un poco más algo que, sin planearlo en absoluto, <strong>nos une tanto en este día</strong>.<br><br>
+    <em>Descúbrelo.</em></p>
+  </div>
+  <img id="portada" src="https://media.discordapp.net/attachments/1354818156891476123/1359104185533992980/IMG_2286.png?ex=67f643e8&is=67f4f268&hm=8c4ac073ed67a0b20aad76b2776a913e514dbb73da52a29e74db64a9c54d6aed&" alt="portada de la ruleta" style="display: block;" />
+  <img id="imagen" alt="libro" />
+  <div>
+    <button id="botonIniciar" onclick="iniciar()">Descubrir mi libro</button>
+    <button id="botonDetener" onclick="detener()">Detener</button>
+  </div>
+  <div id="mensaje"></div>
+  <div id="descripcion"></div>
+  <button id="botonRepetir" onclick="reiniciar()">Volver a girar</button>
+<button id="botonLoQuiero" onclick="irAlDrive()" style="background-color: #d4b38c; color: #ffffff; font-weight: bold; display: none;">Lo quiero</button>
+  <script>
+    const imagenElemento = document.getElementById('imagen');
+    const portadaElemento = document.getElementById('portada');
+    const mensaje = document.getElementById('mensaje');
+    const descripcion = document.getElementById('descripcion');
+    const botonRepetir = document.getElementById('botonRepetir');
+    const botonIniciar = document.getElementById('botonIniciar');
+    const botonDetener = document.getElementById('botonDetener');
+    const intro = document.getElementById('intro');
+
+    const libros = [
+      {
+        nombre: 'Cien Años de Soledad',
+        src: 'https://media.discordapp.net/attachments/1354818156891476123/1359092452505423962/IMG_2283.jpg?ex=67f638fb&is=67f4e77b&hm=7dfe8d95fd3763d0e7e0ffb019afab204c19cfabe180dbc97e831bf0842f4e13&',
+        descripcion: 'Un lugar llamado Macondo, una familia marcada por el tiempo y el destino. Una historia donde los milagros y la melancolía conviven como si siempre hubieran estado ahí.'
+      },
+      {
+        nombre: 'La Casa de los Espíritus',
+        src: 'https://media.discordapp.net/attachments/1354818156891476123/1359092452862066798/IMG_2282.jpg?ex=67f638fb&is=67f4e77b&hm=a924a56e443f528e9532262c33f9e3808c13f232196d84d50131863d5db48e6d&',
+        descripcion: 'Entre los muros de una casa llena de secretos, el amor, la política y lo invisible trazan el destino de una familia que parece vivir entre este mundo y otro más profundo.'
+      },
+      {
+        nombre: 'Pedro Páramo',
+        src: 'https://media.discordapp.net/attachments/1354818156891476123/1359092453210067085/IMG_2281.jpg?ex=67f638fb&is=67f4e77b&hm=a55fea773afbaaf4f4c510d4678e9a0b262104ff65f0e3558138c3268e8d11f4&',
+        descripcion: 'Un viaje al corazón del silencio, donde cada voz es un eco del pasado y cada sombra guarda una historia. Comala no es solo un lugar: es una herida abierta en la memoria.'
+      }
+    ];
+
+    let girando = false;
+    let intervalo;
+    let libroFinal = null;
+
+    function mostrarLibro() {
+      const indice = Math.floor(Math.random() * libros.length);
+      libroFinal = libros[indice];
+      botonLoQuiero.style.display = 'none';
+      imagenElemento.src = libroFinal.src;
+    }
+
+    function iniciar() {
+      if (girando) return;
+      girando = true;
+      intro.style.display = 'none';
+      portadaElemento.style.display = 'none';
+      imagenElemento.style.display = 'block';
+      botonIniciar.style.display = 'none';
+      botonDetener.style.display = 'inline-block';
+      imagenElemento.classList.remove('rebote');
+      mensaje.style.display = 'none';
+      descripcion.style.display = 'none';
+      botonRepetir.style.display = 'none';
+      intervalo = setInterval(mostrarLibro, 100);
+    }
+
+    function detener() {
+      if (!girando) return;
+      clearInterval(intervalo);
+      frenarProgresivamente();
+    }
+
+    function frenarProgresivamente() {
+      const delays = [200, 400, 600, 900];
+      let i = 0;
+
+      function paso() {
+        if (i >= delays.length) {
+          girando = false;
+          imagenElemento.classList.remove('rebote');
+          void imagenElemento.offsetWidth;
+          imagenElemento.classList.add('rebote');
+          mostrarMensajeFinal();
+          return;
+        }
+        setTimeout(() => {
+          mostrarLibro();
+          i++;
+          paso();
+        }, delays[i]);
+      }
+
+      paso();
+    }
+
+    function mostrarMensajeFinal() {
+      mensaje.textContent = `Tu libro es: ${libroFinal.nombre}`;
+      descripcion.textContent = libroFinal.descripcion;
+      mensaje.style.display = 'block';
+      setTimeout(() => mensaje.style.opacity = 1, 10);
+      descripcion.style.display = 'block';
+      setTimeout(() => descripcion.style.opacity = 1, 10);
+      botonDetener.style.display = 'none';
+      botonRepetir.style.display = 'inline-block';
+      botonLoQuiero.style.display = 'inline-block';
+    }
+
+    function reiniciar() {
+      mensaje.style.display = 'none';
+      descripcion.style.display = 'none';
+      botonRepetir.style.display = 'none';
+      iniciar();
+    }
+  
+function irAlDrive() {
+  const enlacesDrive = {
+    'Pedro Páramo': 'https://drive.google.com/drive/folders/1Mv6Qf8OpCVhqXyMFzQUpszEPodYSiRVb?usp=drive_link',
+    'Cien Años de Soledad': 'https://drive.google.com/drive/folders/1SXffqKWDAq3PEQS8ulqWO0CIqBI5BnUe?usp=drive_link',
+    'La Casa de los Espíritus': 'https://drive.google.com/drive/folders/12J2wAIfTMIbug-1x3DVlOeIFQ8EdVCU9?usp=drive_link'
+  };
+
+  window.open(enlacesDrive[libroFinal.nombre], '_blank');
+}
+</script>
+</body>
+</html>
