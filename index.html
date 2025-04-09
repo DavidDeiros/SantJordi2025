@@ -1,3 +1,4 @@
+
 <!DOCTYPE html> 
 <html lang="es">
 <head>
@@ -90,12 +91,16 @@
 </div>
   <img id="portada" src="https://media.discordapp.net/attachments/1354818156891476123/1359104185533992980/IMG_2286.png?ex=67f643e8&is=67f4f268&hm=8c4ac073ed67a0b20aad76b2776a913e514dbb73da52a29e74db64a9c54d6aed&" alt="portada de la ruleta" style="display: block;" />
   <img id="imagen" alt="libro" />
-  <div>
+  <div style="text-align: center;">
     <button id="botonIniciar" onclick="iniciar()">Que gire la ruleta</button>
-    <button id="botonDetener" onclick="detener()">Detener</button>
+<div id="avisoIntentos" style="background-color: #fff5da; border: 1px solid #e0cfa0; padding: 10px 15px; margin-top: 10px; font-size: 15px; color: #5e4a2e; border-radius: 6px; text-align: center;">
+  Puedes girar la ruleta <strong>solo 3 veces</strong>. En la tercera, tendrás que aceptar el libro elegido.
+</div>
+    <button id="botonDetener" onclick="detener()" style="display: none; margin-left: 10px;">Detener</button>
   </div>
   <div id="mensaje"></div>
   <div id="descripcion"></div>
+<div id="contadorIntentos" style="margin-top: 20px; padding: 8px 15px; background-color: #faede2; border: 1px solid #d8c0a3; border-radius: 6px; font-weight: bold; font-size: 15px; color: #3e2f1c; text-align: center; display: none;"></div>
 <div>
   <button id="botonLoQuiero" onclick="irAlDrive()" style="background-color: #d4b38c; color: #ffffff; font-weight: bold; display: none;">Lo quiero</button>
   <button id="botonRepetir" onclick="reiniciar()">Volver a girar</button>
@@ -138,6 +143,7 @@
     let girando = false;
     let intervalo;
     let libroFinal = null;
+let intentos = 0;
 
     function mostrarLibro() {
       const indice = Math.floor(Math.random() * libros.length);
@@ -147,6 +153,9 @@
     }
 
     function iniciar() {
+      document.getElementById('avisoIntentos').style.display = 'none';
+      intentos++;
+      if (intentos > 3) return;
       if (girando) return;
       girando = true;
       intro.style.display = 'none';
@@ -191,6 +200,9 @@
     }
 
     function mostrarMensajeFinal() {
+      const contador = document.getElementById('contadorIntentos');
+      contador.textContent = `Intento ${intentos} de 3`;
+      contador.style.display = 'block';
       mensaje.innerHTML = `Tu libro es: <strong>${libroFinal.nombre}</strong>`;
       descripcion.textContent = libroFinal.descripcion;
       mensaje.style.display = 'block';
@@ -198,7 +210,11 @@
       descripcion.style.display = 'block';
       setTimeout(() => descripcion.style.opacity = 1, 10);
       botonDetener.style.display = 'none';
-      botonRepetir.style.display = 'inline-block';
+      if (intentos < 3) {
+        botonRepetir.style.display = 'inline-block';
+      } else {
+        botonRepetir.style.display = 'none';
+      }
       botonLoQuiero.style.display = 'inline-block';
     }
 
