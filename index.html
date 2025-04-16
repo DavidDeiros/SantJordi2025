@@ -89,7 +89,7 @@
   <strong>Este año quiero acercarte un poco más algo que, sin planearlo en absoluto, nos une tanto en este día.</strong><br><br>
   <span style="font-size: 1.2em;">Descúbrelo.</span></p>
 </div>
-  <img id="portada" src="https://cdn.discordapp.com/attachments/1354818156891476123/1359104185533992980/IMG_2286.png?ex=67f79568&is=67f643e8&hm=f6db97cfca9b7f7278aaf30333eaaeb217eb716469362ceef5a6750e99bf076f&" alt="portada de la ruleta" style="display: block;" />
+  <img id="portada" src="https://cdn.discordapp.com/attachments/1354818156891476123/1359104185533992980/IMG_2286.png?ex=6800cfe8&is=67ff7e68&hm=29335587254f5e44a2c81a9902a750ec05be851c01829dfd5eb89308df8eee81&" alt="portada de la ruleta" style="display: block;" />
   <img id="imagen" alt="libro" />
   <div style="text-align: center;">
     <button id="botonIniciar" onclick="iniciar()">Que gire la ruleta</button>
@@ -120,28 +120,43 @@
     const libros = [
       {
         nombre: 'Cien Años de Soledad',
-        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359092452505423962/IMG_2283.jpg?ex=67f78a7b&is=67f638fb&hm=5cc5ed5b2729280b6e7e7a047560622e1f212b2025c0064c0d842d6c6c38e566&',
+        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359092452505423962/IMG_2283.jpg?ex=6800c4fb&is=67ff737b&hm=79510c39f681537f941e1f0994aef22adc82e947e6193289cf780af3577851cf&',
         descripcion: 'Un lugar llamado Macondo, una familia marcada por el tiempo y el destino. Una historia donde los milagros y la melancolía conviven como si siempre hubieran estado ahí.'
       },
       {
         nombre: 'La Casa de los Espíritus',
-        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359092452862066798/IMG_2282.jpg?ex=67f78a7b&is=67f638fb&hm=ff382a121bd0037c05f0d563f15d678ad8985179b7b13fb10bca3c0b2cc38ca9&',
+        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359092452862066798/IMG_2282.jpg?ex=6800c4fb&is=67ff737b&hm=daf158f7eb49ebc9123ea84fb19557f05eb880111d4abfc1510a7fcc761a5464&',
         descripcion: 'Entre los muros de una casa llena de secretos, el amor, la política y lo invisible trazan el destino de una familia que parece vivir entre este mundo y otro más profundo.'
       },
       {
         nombre: 'Pedro Páramo',
-        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359092453210067085/IMG_2281.jpg?ex=67f78a7b&is=67f638fb&hm=404983ca66a189cb1b5657d52d04ab2e598b0c986718b5679a41a77407906c4c&',
+        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359092453210067085/IMG_2281.jpg?ex=6800c4fb&is=67ff737b&hm=ba25760b2195fd14d22c95ee7d97d92d23625c46d59d0cada1ed2696066177b5&',
         descripcion: 'Un viaje al corazón del silencio, donde cada voz es un eco del pasado y cada sombra guarda una historia. Comala no es solo un lugar: es una herida abierta en la memoria.'
       },
       {
         nombre: 'Como Agua para Chocolate',
-        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359201091463680222/IMG_2302.jpg?ex=67f7efa8&is=67f69e28&hm=57a2dae3feef1d2b960d97fa69dcee450f7ea1e00f03b25d6a1a6a36ea5eda73&',
+        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359201091463680222/IMG_2302.jpg?ex=68012a28&is=67ffd8a8&hm=ff45544b2cb057b10093c7786b8ac955f954936a0def31613013e6b1bcc397d6&',
         descripcion: 'Una receta, una emoción, un destino. Tita transforma su mundo y el de quienes la rodean a través del amor, el dolor y los sabores que traspasan generaciones.'
       },
       {
         nombre: 'Rayuela',
-        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359560325350817842/Rayuela_Cover.jpg?ex=67f7ecb8&is=67f69b38&hm=6d7dc9cdf613a0420b85f5e23e453d598c4b5b9d55667828dbf15b19f29727fe&',
+        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1359560325350817842/Rayuela_Cover.jpg?ex=68012738&is=67ffd5b8&hm=22026709a41f18f7121980235fc1c4d9279a466eba191460343eed8802fd31b3&',
         descripcion: 'Un viaje a través del lenguaje, el amor, el absurdo y la conciencia. Una novela que no se lee, se habita: en París, en Buenos Aires, en los márgenes de la realidad y la imaginación.'
+      },
+      {
+        nombre: 'Ficciones',
+        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1362145001236205669/Ficciones_Cover.jpg?ex=680153e3&is=68000263&hm=56072b4eeda67bd16ab9296e9398f5ed7e45a9b7aaffb8388a451d118253d43e&',
+        descripcion: 'Un laberinto literario donde cada cuento encierra un espejo, un símbolo y una puerta. Borges invita a perderse entre ficciones que se repliegan sobre sí mismas como sueños dentro de sueños.'
+      },
+      {
+        nombre: 'Los Recuerdos del Porvenir',
+        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1362185126422909150/LosRecuerdosDelPorvenir_Cover.jpg?ex=68017942&is=680027c2&hm=e2fed205328b77d6d35b612a3f721e23eadf07c1a8a5e59b93752f0f0e55fc36&',
+        descripcion: 'Un pueblo detenido en el tiempo observa, narra y recuerda los ecos de la violencia y la memoria. Una novela poderosa y poética sobre lo inevitable y lo invisible.'
+      },
+      {
+        nombre: 'El Túnel',
+        src: 'https://cdn.discordapp.com/attachments/1354818156891476123/1362203084578754651/ElTunel_Cover.jpg?ex=680189fb&is=6800387b&hm=95fea57808bf30c36f5aecb14d7a2ec49b646536d6dde1cc1b2b8b77632e9012&',
+        descripcion: 'Un descenso al abismo de la obsesión, la soledad y la culpa. Sábato nos introduce en la mente perturbada de un hombre que narra, con brutal lucidez, el crimen que cambió su vida.'
       }
     ];
 
@@ -236,7 +251,10 @@ let intentos = 0;
         'Cien Años de Soledad': 'https://drive.google.com/drive/folders/1SXffqKWDAq3PEQS8ulqWO0CIqBI5BnUe?usp=drive_link',
         'La Casa de los Espíritus': 'https://drive.google.com/drive/folders/12J2wAIfTMIbug-1x3DVlOeIFQ8EdVCU9?usp=drive_link',
         'Como Agua para Chocolate': 'https://drive.google.com/drive/folders/1Zfv16i9nOpWKNDM2lPtSnrUXNcRzdHP6?usp=drive_link',
-        'Rayuela': 'https://drive.google.com/drive/folders/1FKbOHtPeCWCuTCFH_hbMg5UAlV4-9KQr?usp=drive_link'
+        'Rayuela': 'https://drive.google.com/drive/folders/1FKbOHtPeCWCuTCFH_hbMg5UAlV4-9KQr?usp=drive_link',
+        'Ficciones': 'https://drive.google.com/drive/folders/1uL5ZB1jRez1_bJPsoboh1VpRC1akoAAk?usp=drive_link',
+        'Los Recuerdos del Porvenir': 'https://drive.google.com/drive/folders/16-tLbKOgzdocU2qXwqYsmdy15mGt_1u-?usp=drive_link',
+        'El Túnel': 'https://drive.google.com/drive/folders/1dfXae_eHmDpfHBFJ_oYY6KwpqCOZBz4R?usp=drive_link'
       };
 
       window.open(enlacesDrive[libroFinal.nombre], '_blank');
